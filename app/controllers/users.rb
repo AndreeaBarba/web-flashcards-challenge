@@ -5,6 +5,7 @@ end
 post '/users/login' do
   @user = User.find_by(username: params[:username])
   if @user && @user.authenticate(params[:password])
+    session[:user_id] = @user.id
     redirect '/'
     # decided where to redirect?
   else
@@ -14,16 +15,12 @@ post '/users/login' do
 end
 
 get '/users/new' do
-
   erb :'users/register'
-
 end
 
 post '/users/new' do
-  p params
   user = User.new(params[:user])
   if user.save
-    p "hello!!!!"
     user.encrypted_password = user[:password]
     user.save!
     redirect '/users/login'
@@ -32,4 +29,9 @@ post '/users/new' do
     @errors  = user.errors.full_messages
     erb :'/users/register'
   end
+end
+
+get '/users/logout' do
+  session.delete(:user_id)
+  redirect '/users/login'
 end
