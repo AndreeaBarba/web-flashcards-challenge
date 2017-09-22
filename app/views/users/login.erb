@@ -1,6 +1,10 @@
 <h1>Login</h1>
 
-<form action='users/new' method="post">
+<% if @errors %>
+  <%= @errors %><br><br>
+<% end %>
+
+<form action='/users/login' method="post">
   <label for="username">Username:</label><br>
   <input type="text" name="username">
   <br>
