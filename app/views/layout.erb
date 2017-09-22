@@ -18,19 +18,21 @@
   <title>Flashcards</title>
 </head>
 <body>
-      <header role="banner" class="mar-t-5 pad-t-2 pad-b-4 pad-s-1 wrap-float bg-white">
+  <header role="banner" class="mar-t-5 pad-t-2 pad-b-4 pad-s-1 wrap-float bg-white">
     <div class="max-w-700 center wrap-float">
       <nav class="clearfix mar-b-1">
         <ul class="no-bullets no-margin no-padding right">
-          <% if !session[:user_id] %>
+          <% if !logged_in? %>
             <li class="pipe-separate t-light-green left"><a href="/users/new">register</a> | <a href="/users/login">login</a> | <a href="/">home</a></li>
           <% else %>
-            <li class="pipe-separate t-light-green left"><a href="/users/<%= session[:user_id] %>"><%=User.find(session[:user_id]).username%></a> | <a href="/users/logout">logout</a> | <a href="/">home</a></li>
+            <% user = user_session %>
+            <li class="pipe-separate t-light-green left"><a href="/users/<%= user.id %>"><%=user.username%></a> | <a href="/users/logout">logout</a> | <a href="/">home</a></li>
           <% end %>
         </ul>
       </nav>
-      <h1>Flashcards</h1>
-    </header>
+    </div>
+    <h1>Flashcards</h1>
+  </header>
   <%= yield %>
 </body>
 </html>
