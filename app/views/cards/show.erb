@@ -1,0 +1,14 @@
+<h1><%= @deck.title %></h1>
+
+<h3><%= @card.question %></h3>
+
+<form action="/decks/:deck_id/cards/:card_id" method='post'>
+  Enter your guess:
+  <br>
+  <input type="text" name="user_answer">
+  <br>
+  <br>
+  <input type="submit" value="submit your guess">
+</form>
+
+
