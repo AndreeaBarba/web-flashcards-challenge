@@ -2,3 +2,9 @@ get '/decks' do
   @decks = Deck.all
   erb :'decks/index'
 end
+
+get '/decks/:deck_id/cards/:card_id' do
+  @deck = Deck.find(params[:deck_id])
+  @card = Card.find(params[:card_id])
+  erb :'cards/show'
+end
