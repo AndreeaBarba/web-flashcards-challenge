@@ -1,3 +1,6 @@
+before '/rounds/:round_id/cards/:card_id' do
+  redirect '/error' unless session[:user_id]
+end
 
 get '/rounds/:round_id/cards/:card_id' do
   @round = Round.find(params[:round_id])
