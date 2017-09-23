@@ -17,7 +17,7 @@ get '/decks/:id' do
   cards = (1..card_count).to_a
   shuffled_cards = cards.shuffle
   round = Round.create(deck_id: params[:id], user_id:
-    session[:user_id])
+    session[:user_id], guess_count: 0)
   session[:round] = round.id
   session[:cards] = shuffled_cards
   session[:deck_size] = shuffled_cards.length

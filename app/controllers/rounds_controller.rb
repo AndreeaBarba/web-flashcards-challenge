@@ -12,10 +12,11 @@ post '/rounds/:round_id/cards/:card_id' do
 
   guess = Guess.find_or_create_by(:card_id => params[:card_id], :round_id => params[:round_id])
   guess.user_answer = params[:user_answer]
-  @round_id = params[:round_id]
+  @round = Round.find(params[:round_id])
+  @round.guess_count += 1
+  @round.save
   session[:counter] += 1
   session[:cards].rotate!
-  ep session[:guesses]
   if guess.user_answer == guess.card.answer
 
     if guess.correct == nil
@@ -36,7 +37,6 @@ post '/rounds/:round_id/cards/:card_id' do
   if session[:counter] == session[:deck_size]
     if session[:cards].empty?
       @finished = true
-      @guesses = session[:guesses]
     else
       session[:counter] = 0
       session[:deck_size] = session[:cards].length
