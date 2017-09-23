@@ -10,23 +10,56 @@ end
 
 post '/rounds/:round_id/cards/:card_id' do
 
-  guess = Guess.create(:user_answer => params[:user_answer], :card_id => params[:card_id], :round_id => params[:round_id])
+  guess = Guess.find_or_create_by(:card_id => params[:card_id], :round_id => params[:round_id])
+  guess.user_answer = params[:user_answer]
   @round_id = params[:round_id]
   session[:counter] += 1
   session[:cards].rotate!
+  ep session[:guesses]
   if guess.user_answer == guess.card.answer
-    guess.correct? == true
+
+    if guess.correct == nil
+      guess.is_first_try = true
+    else
+      guess.is_first_try = false
+    end
+
+    guess.correct = true
     @message = "You are correct!"
     session[:cards].pop
   else
-    guess.correct? == false
+    guess.correct = false
     @message = "You are incorrect! The answer is: #{guess.card.answer}"
   end
-  ep session
+  guess.save
+
+  if session[:counter] == session[:deck_size]
+    if session[:cards].empty?
+      @finished = true
+      @guesses = session[:guesses]
+    else
+      session[:counter] = 0
+      session[:deck_size] = session[:cards].length
+      session[:cards].shuffle!
+    end
+  end
   erb :"/cards/feedback"
 end
 
 
-get '/' do
-
+get '/rounds/:round_id/finish' do
+  @round = Round.find(params[:round_id])
+  session.delete(:cards)
+  session.delete(:counter)
+  session.delete(:deck_size)
+  session.delete(:guesses)
+  erb :'/cards/finish'
 end
+
+
+
+
+
+
+
+

@@ -15,7 +15,7 @@ class User < ApplicationRecord
     self.password = @encrypted_password
   end
 
-  def authenticate(password)
-    self.password == password
+  def authenticate(something)
+    self.password == encrypted_password
   end
 end

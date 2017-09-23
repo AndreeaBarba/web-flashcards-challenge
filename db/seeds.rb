@@ -13,6 +13,3 @@ cards = {question: "What is the capital of Romania?", :answer => "Bucharest"}
 Card.create(cards)
 
 Deck.create(:title => 'random', :cards => Card.all)
-
-round = Round.create(:deck_id => 1)
-
