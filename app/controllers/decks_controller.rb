@@ -14,11 +14,14 @@ end
 get '/decks/:id' do
   found_deck = Deck.find(params[:id])
   card_count = found_deck.cards.count
-  ordered_cards = (1..card_count).to_a
-  shuffled_cards = ordered_cards.shuffle
-  @round = Round.create(deck_id: params[:id], user_id: session[:user_id])
-  session[:round] = { :@round.id => shuffled_cards }
+  ep cards = (1..card_count).to_a
+  ep shuffled_cards = cards.shuffle
+  @round = Round.create(deck_id: params[:id], user_id:
+    session[:user_id])
+  ep @round
+  session[:round] = { @round.id => shuffled_cards }
   session[:curr_index] = 0
-  redirect "/rounds/#{@round.id}/cards/#{random_card}"
+  ep session
+  session[:current_card] = session[:round][@round.id][session[:curr_index]]
+  redirect "/rounds/#{@round.id}/cards/#{session[:current_card]}"
 end
-
