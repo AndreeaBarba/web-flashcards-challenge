@@ -15,12 +15,30 @@ post '/rounds/:round_id/cards/:card_id' do
   session[:counter] += 1
   session[:cards].rotate!
   if guess.user_answer == guess.card.answer
-    guess.correct? == true
+
+    if guess.correct == nil
+      guess.is_first_try = true
+    else
+      guess.is_first_try = false
+    end
+
+    guess.correct = true
     @message = "You are correct!"
     session[:cards].pop
   else
-    guess.correct? == false
+    guess.correct = false
     @message = "You are incorrect! The answer is: #{guess.card.answer}"
+  end
+  guess.save
+
+  if session[:counter] == session[:deck_size]
+    if session[:cards].empty?
+      # redirect **TO SOME CONGRATULATORY PAGE WHICH DELETES ALL SESSIONS**
+    else
+      session[:counter] = 0
+      session[:deck_size] = session[:cards].length
+      session[:cards].shuffle!
+    end
   end
   ep session
   erb :"/cards/feedback"
