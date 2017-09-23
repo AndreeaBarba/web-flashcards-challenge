@@ -13,7 +13,6 @@ post '/rounds/:round_id/cards/:card_id' do
   guess = Guess.find_or_create_by(:card_id => params[:card_id], :round_id => params[:round_id])
   guess.user_answer = params[:user_answer]
   @round_id = params[:round_id]
-  session[:guesses] += 1
   session[:counter] += 1
   session[:cards].rotate!
   ep session[:guesses]
@@ -50,11 +49,9 @@ end
 
 get '/rounds/:round_id/finish' do
   @round = Round.find(params[:round_id])
-  @guesses = params[:guesses]
   session.delete(:cards)
   session.delete(:counter)
   session.delete(:deck_size)
-  session.delete(:round)
   session.delete(:guesses)
   erb :'/cards/finish'
 end
