@@ -18,8 +18,9 @@ get '/decks/:id' do
   shuffled_cards = cards.shuffle
   round = Round.create(deck_id: params[:id], user_id:
     session[:user_id])
+  session[:round] = round.id
   session[:cards] = shuffled_cards
   session[:counter] = 0
-  redirect "/rounds/#{round.id}/cards/#{session[:cards][0]}?round_id=#{round.id}"
+  redirect "/rounds/#{session[:round]}/cards/#{session[:cards][0]}"
 end
 
