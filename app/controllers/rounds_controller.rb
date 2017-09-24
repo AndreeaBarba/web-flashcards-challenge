@@ -15,7 +15,7 @@ post '/rounds/:round_id/cards/:card_id' do
   @round_id = params[:round_id]
   session[:counter] += 1
   session[:cards].rotate!
-  ep session[:guesses]
+  session[:guesses] += 1
   if guess.user_answer == guess.card.answer
 
     if guess.correct == nil
@@ -49,6 +49,8 @@ end
 
 get '/rounds/:round_id/finish' do
   @round = Round.find(params[:round_id])
+  @round.update(guess_count: session[:guesses])
+  @round.save!
   session.delete(:cards)
   session.delete(:counter)
   session.delete(:deck_size)

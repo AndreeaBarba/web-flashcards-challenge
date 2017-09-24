@@ -22,6 +22,7 @@ get '/decks/:id' do
   session[:cards] = shuffled_cards
   session[:deck_size] = shuffled_cards.length
   session[:counter] = 0
+  session[:guesses] = 0
   redirect "/rounds/#{session[:round]}/cards/#{session[:cards][0]}"
 end
 

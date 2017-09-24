@@ -35,3 +35,8 @@ get '/users/logout' do
   session.delete(:user_id)
   redirect '/users/login'
 end
+
+get '/users/:id' do
+  @user = User.find(params[:id])
+  erb :'users/profile'
+end
