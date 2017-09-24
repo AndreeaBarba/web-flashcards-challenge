@@ -1,0 +1,15 @@
+<h2><%= @user.username %></h2>
+
+<ul>
+<% @user.decks.uniq.each do |deck| %>
+  <li><%= deck.title %></li>
+  <% @user.rounds.where(deck_id: deck.id).each do |round| %>
+    <li>Date: <%= round.created_at.to_date %></li>
+  <li>Total Cards:<%= deck.cards.count %></li>
+  <li>First Guess Correct:<%= @user.guesses.where(is_first_try: true).count %></li>
+  <li>Total guesses:<%= round.guess_count %></li><br><br>
+  <%end%>
+<% end %>
+</ul>
+<br>
+<br>
