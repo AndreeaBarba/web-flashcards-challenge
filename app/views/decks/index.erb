@@ -1,7 +1,7 @@
 <h2>Flashcard Decks:</h2>
 
 <% @decks.each do |deck| %>
-  <ul>
+  <ul class='decks'>
     <li><a href="/decks/<%= deck.id%>"><%= deck.title %></li></a>
   </ul>
 <% end %>

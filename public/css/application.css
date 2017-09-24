@@ -1,0 +1,75 @@
+
+ body {
+   font-family: Tahoma, sans-serif;
+   background-color: #A9A9A9;
+   color: #E9E9E9;
+ }
+
+ a:hover {
+   color: #984B43;
+ }
+a {
+  color: navy;
+  }
+
+li {
+  list-style-type: none;
+}
+
+.user-stats {
+  display: inline;
+  list-style-type: none;
+  padding-right: 54px;
+}
+
+.user-box {
+  border: 1px solid black;
+  padding: 5px;
+}
+
+nav ul {
+  text-align: center;
+  margin-right: 46px;
+}
+
+h1, h2, h3 {
+  text-align: center;
+}
+
+.deck-title {
+  font-size: 22px;
+  font-weight: 900;
+  text-align: center;
+  margin-right: 35px;
+}
+
+.deck-stats {
+  width: 55%;
+  margin: auto;
+}
+
+.decks {
+  text-align: center;
+  list-style-type: none;
+  margin-right: 51px;
+}
+
+form {
+  text-align: center;
+}
+
+.submit {
+    background-color: navy;
+    border: none;
+    color: white;
+    padding: 10px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 8px;
+}
+
+input {
+  color: black;
+}
