@@ -1,1 +1,13 @@
-<span>Sorry, we couldn't find what you are looking for! Maybe you aren't logged in?</span>
+<span>
+
+  Sorry, we couldn't find what you are looking for!
+
+  <% if !session[:user_id] %>
+    Maybe you aren't logged in?
+  <% end %>
+
+  <% if session[:user_id] && session[:round] && session[:cards] %>
+    <a href="http://localhost:9393/rounds/<%= session[:round] %>/cards/<%= session[:cards][0] %>"> Try going back to your current game!</a>
+  <% end %>
+
+</span>
