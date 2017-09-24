@@ -36,7 +36,7 @@ post '/rounds/:round_id/cards/:card_id' do
   if session[:counter] == session[:deck_size]
     if session[:cards].empty?
       @finished = true
-      @guesses = session[:guesses]
+      # Round.find(@round_id).guess_count = session[:guesses]
     else
       session[:counter] = 0
       session[:deck_size] = session[:cards].length

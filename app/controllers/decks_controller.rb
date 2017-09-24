@@ -13,8 +13,7 @@ end
 
 get '/decks/:id' do
   found_deck = Deck.find(params[:id])
-  card_count = found_deck.cards.count
-  cards = (1..card_count).to_a
+  cards = found_deck.cards.pluck(:id)
   shuffled_cards = cards.shuffle
   round = Round.create(deck_id: params[:id], user_id:
     session[:user_id])
