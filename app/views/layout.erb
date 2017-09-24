@@ -14,14 +14,15 @@
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script src="/js/application.js"></script>
-
   <title>Flashcards</title>
+
 </head>
 <body>
   <header role="banner" class="mar-t-5 pad-t-2 pad-b-4 pad-s-1 wrap-float bg-white">
+    <h1>Flashcards</h1>
     <div class="max-w-700 center wrap-float">
       <nav class="clearfix mar-b-1">
-        <ul class="no-bullets no-margin no-padding right">
+        <ul class="nav-style no-bullets no-margin no-padding right">
           <% if !logged_in? %>
             <li class="pipe-separate t-light-green left"><a href="/users/new">register</a> | <a href="/users/login">login</a> | <a href="/">home</a></li>
           <% else %>
@@ -31,7 +32,6 @@
         </ul>
       </nav>
     </div>
-    <h1>Flashcards</h1>
   </header>
   <%= yield %>
 </body>
