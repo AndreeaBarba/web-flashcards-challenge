@@ -7,10 +7,11 @@
   <div class='user-box'>
     <li class='user-stats'>Date: <%= round.created_at.to_date %></li>
     <li class='user-stats'>Cards in Deck:<%= deck.cards.count %></li>
-    <li class='user-stats'>First Guess Correct:<%= @user.guesses.where(is_first_try: true).count %></li>
+    <li class='user-stats'>First Guess Correct:<%= @user.guesses.where(is_first_try: true, round_id: round.id).count %></li>
     <li class='user-stats'>Total guesses:<%= round.guess_count %></li><br><br>
   </div>
   <%end%>
+  <br>
 <% end %>
 </ul>
 <br>

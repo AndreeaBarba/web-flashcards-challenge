@@ -7,5 +7,8 @@
 <% end %>
 
 <% if session[:user_id] && session[:round] && session[:cards] %>
-  <p>It looks like you have unfinished business! <a href="http://localhost:9393/rounds/<%= session[:round] %>/cards/<%= session[:cards][0] %>"> Try going back to your current game!</a></p>
+  <p>It looks like you have unfinished business!
+  <br>
+  <a href="http://localhost:9393/rounds/<%= session[:round] %>/cards/<%= session[:cards][0] %>"> Try going back to your current game!</a>
+  </p>
 <% end %>
