@@ -1,7 +1,10 @@
 <%= @message %>
 <br><br>
 <% if @finished  %>
-    <a href="/rounds/<%=@round_id%>/finish?guesses=<%=@guesses%>">Click here to continue!</a>
+    <a href="/rounds/<%=@round_id%>/finish">Click here to continue!</a>
 <% else %>
     <a href="/rounds/<%= @round_id %>/cards/<%= session[:cards][0]%>">Click here to continue!</a>
 <%end%>
+<br>
+<br>
+<a href="/rounds/end">Click here to end the round!</a>
