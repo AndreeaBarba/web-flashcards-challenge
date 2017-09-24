@@ -1,5 +1,7 @@
 before '/rounds/:round_id/cards/:card_id' do
-  redirect '/error' unless session[:user_id]
+  ep session
+  ep params
+  redirect '/error' unless session[:user_id] && session[:round] == params[:round_id].to_i && session[:cards][0] == params[:card_id].to_i
 end
 
 get '/rounds/:round_id/cards/:card_id' do
@@ -46,7 +48,6 @@ post '/rounds/:round_id/cards/:card_id' do
   erb :"/cards/feedback"
 end
 
-
 get '/rounds/:round_id/finish' do
   @round = Round.find(params[:round_id])
   @round.update(guess_count: session[:guesses])
@@ -58,7 +59,14 @@ get '/rounds/:round_id/finish' do
   erb :'/cards/finish'
 end
 
-
+get '/rounds/end' do
+  session.delete(:round)
+  session.delete(:cards)
+  session.delete(:deck_size)
+  session.delete(:counter)
+  session.delete(:guesses)
+  redirect '/decks'
+end
 
 
 
