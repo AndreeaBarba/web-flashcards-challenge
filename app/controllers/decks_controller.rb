@@ -9,6 +9,10 @@ end
 
 before '/decks/:id' do
   redirect '/error' unless session[:user_id]
+  unless !session[:round]
+    session[:notice] = true
+    redirect '/decks'
+  end
 end
 
 get '/decks/:id' do

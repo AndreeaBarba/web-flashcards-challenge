@@ -53,18 +53,23 @@ get '/rounds/:round_id/finish' do
   @round.update(guess_count: session[:guesses])
   @round.save!
   session.delete(:cards)
+  session.delete(:round)
   session.delete(:counter)
   session.delete(:deck_size)
   session.delete(:guesses)
+  session.delete(:notice)
   erb :'/cards/finish'
 end
 
-get '/rounds/end' do
+delete '/rounds/:round_id' do
   session.delete(:round)
   session.delete(:cards)
   session.delete(:deck_size)
   session.delete(:counter)
   session.delete(:guesses)
+  session.delete(:notice)
+  Guess.where("round_id = #{params[:round_id]}").destroy_all
+  Round.destroy(params[:round_id])
   redirect '/decks'
 end
 

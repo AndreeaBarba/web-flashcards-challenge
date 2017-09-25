@@ -2,11 +2,14 @@
   <p><%= @message %></p>
   <br>
   <% if @finished  %>
-      <a href="/rounds/<%=@round_id%>/finish">Click here to continue!</a>
+    <a href="/rounds/<%=@round_id%>/finish">Click here to continue!</a>
   <% else %>
-      <a href="/rounds/<%= @round_id %>/cards/<%= session[:cards][0]%>">Click here to continue!</a>
+    <a href="/rounds/<%= @round_id %>/cards/<%= session[:cards][0]%>">Click here to continue!</a>
   <%end%>
 </div>
 <br>
 <br>
-<a class="quit" href="/rounds/end">Click here to end the round!</a>
+<form action="/rounds/<%=@round_id%>" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <input type="submit" value="End Round">
+</form>
