@@ -56,6 +56,7 @@ get '/rounds/:round_id/finish' do
   session.delete(:counter)
   session.delete(:deck_size)
   session.delete(:guesses)
+  session.delete(:notice)
   erb :'/cards/finish'
 end
 
@@ -65,6 +66,7 @@ delete '/rounds/:round_id' do
   session.delete(:deck_size)
   session.delete(:counter)
   session.delete(:guesses)
+  session.delete(:notice)
   Guess.where("round_id = #{params[:round_id]}").destroy_all
   Round.destroy(params[:round_id])
   redirect '/decks'

@@ -1,5 +1,12 @@
 <h2>Flashcard Decks:</h2>
 
+<% if session[:notice] %>
+  <p>Sorry - you can't start a new round if you're currently in one!
+  <br>
+  Finish your current round or click the "End Round" button!
+</p>
+<% end %>
+
 <% @decks.each do |deck| %>
   <ul class='decks'>
     <h3><li><a href="/decks/<%= deck.id%>"><%= deck.title %></li></a></h3>
@@ -9,7 +16,11 @@
 <% if session[:user_id] && session[:round] && session[:cards] %>
   <p>It looks like you have unfinished business!
   <br>
-  <a href="http://localhost:9393/rounds/<%= session[:round] %>/cards/<%= session[:cards][0] %>"> Try going back to your current game!</a>
+  <% if !session[:cards].empty? %>
+    <a href="http://localhost:9393/rounds/<%= session[:round] %>/cards/<%= session[:cards][0] %>"> Try going back to your current game!</a>
+  <% else %>
+    <a href="http://localhost:9393/rounds/<%= session[:round] %>/finish">Finish your current game!</a>
+  <% end %>
   <br>
   <br>
   Or, if you're done:</p>
