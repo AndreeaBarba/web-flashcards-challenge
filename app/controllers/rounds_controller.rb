@@ -53,6 +53,7 @@ get '/rounds/:round_id/finish' do
   @round.update(guess_count: session[:guesses])
   @round.save!
   session.delete(:cards)
+  session.delete(:round)
   session.delete(:counter)
   session.delete(:deck_size)
   session.delete(:guesses)
