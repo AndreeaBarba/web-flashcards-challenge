@@ -2,7 +2,7 @@
 
 <% @decks.each do |deck| %>
   <ul class='decks'>
-    <li><a href="/decks/<%= deck.id%>"><%= deck.title %></li></a>
+    <h3><li><a href="/decks/<%= deck.id%>"><%= deck.title %></li></a></h3>
   </ul>
 <% end %>
 
@@ -10,5 +10,11 @@
   <p>It looks like you have unfinished business!
   <br>
   <a href="http://localhost:9393/rounds/<%= session[:round] %>/cards/<%= session[:cards][0] %>"> Try going back to your current game!</a>
-  </p>
+  <br>
+  <br>
+  Or, if you're done:</p>
+  <form action="/rounds/<%=session[:round]%>" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <input type="submit" value="End Round">
+  </form>
 <% end %>

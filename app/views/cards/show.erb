@@ -9,7 +9,9 @@
   <br>
   <br>
   <button class="submit">Submit your guess</button>
-  <!-- <input type="submit" value="submit your guess"> -->
 </form>
 <br>
-<a class="quit" href="/rounds/end">Click here to end the round!</a>
+<form action="/rounds/<%=@round_id%>" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <input type="submit" value="End Round">
+</form>

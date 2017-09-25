@@ -9,4 +9,7 @@
 </div>
 <br>
 <br>
-<a class="quit" href="/rounds/end">Click here to end the round!</a>
+<form action="/rounds/<%=@round_id%>" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <input type="submit" value="End Round">
+</form>
